@@ -10,7 +10,7 @@ router = APIRouter()
 @router.post("/upload-resume")
 async def upload_resume(file: UploadFile = File(...)):
     """
-    Upload a resume PDF and return extracted text.
+    Upload resume, extract text and return skills & AI analysis."
     """
 
     # Validate file type
@@ -31,13 +31,12 @@ async def upload_resume(file: UploadFile = File(...)):
         skills = extract_skills(extracted_text)
 
         # AI analysis
-        ai_feedback = analyze_resume(extracted_text)
+        ai_result = analyze_resume(extracted_text)
 
         return {
             "filename": file.filename,
             "skills": skills,
-            "ai_feedback": ai_feedback,
-            "preview_text": extracted_text[:300]
+            "ai_analysis": ai_result
         }
 
     except Exception as e:
