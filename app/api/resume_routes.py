@@ -1,5 +1,6 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException
 from app.services.resume_parser import extract_text_from_pdf
+from app.services.skill_extractor import extract_skills
 
 router = APIRouter()
 
@@ -23,9 +24,13 @@ async def upload_resume(file: UploadFile = File(...)):
         if not extracted_text:
             raise HTTPException(status_code=400, detail="Could not extract text from PDF")
 
+        # Extract skills
+        skills = extract_skills(extracted_text)
+
         return {
             "filename": file.filename,
-            "extracted_text": extracted_text[:1000]
+            "skills": skills,
+            "preview_text": extracted_text[:1000]
         }
 
     except Exception as e:
