@@ -6,3 +6,4 @@ __pycache__/
 .DS_Store
 .idea/.DS_Store
 app/.DS_Store
+.env
