@@ -1,6 +1,7 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException
 from app.services.resume_parser import extract_text_from_pdf
 from app.services.skill_extractor import extract_skills
+from app.services.ai_analyzer import analyze_resume
 
 router = APIRouter()
 
@@ -27,10 +28,14 @@ async def upload_resume(file: UploadFile = File(...)):
         # Extract skills
         skills = extract_skills(extracted_text)
 
+        # AI analysis
+        ai_feedback = analyze_resume(extracted_text)
+
         return {
             "filename": file.filename,
             "skills": skills,
-            "preview_text": extracted_text[:1000]
+            "ai_feedback": ai_feedback,
+            "preview_text": extracted_text[:300]
         }
 
     except Exception as e:
