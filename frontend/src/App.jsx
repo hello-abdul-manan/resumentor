@@ -3,6 +3,7 @@ import axios from 'axios'
 
 function App() {
   const [file, setFile] = useState(null);
+  const [result, setResult] = useState(null);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -23,7 +24,7 @@ function App() {
         formData
       );
 
-      console.log("Response:", response.data);
+      setResult(response.data);
 
     } catch (error) {
       console.error("Upload error:", error);
@@ -44,6 +45,19 @@ function App() {
       <button onClick={handleUpload}>
         Upload & Analyze
       </button>
+
+      {result && (
+        <div>
+          <h2>Skills</h2>
+          <ul>
+            {result.skills.map((skill, index) => (
+              <li key={index}>{skill}</li>
+            ))}
+          </ul>
+
+          <h2>Score: {result.analysis.score}</h2>
+        </div>
+      )}
     </div>
   )
 }
