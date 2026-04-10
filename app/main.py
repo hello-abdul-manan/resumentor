@@ -2,9 +2,9 @@ from fastapi import FastAPI
 from app.api.resume_routes import router as resume_router
 from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI(title="Resumind API")
+app = FastAPI(title="Resumentor API")
 
-# Add CORS middleware to allow frontend to backend commuincation
+# Add CORS middleware to allow frontend and backend commuincation
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
