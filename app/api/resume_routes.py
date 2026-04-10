@@ -36,7 +36,7 @@ async def upload_resume(file: UploadFile = File(...)):
         return {
             "filename": file.filename,
             "skills": skills,
-            "ai_analysis": ai_result
+            "analysis": ai_result
         }
 
     except Exception as e:
