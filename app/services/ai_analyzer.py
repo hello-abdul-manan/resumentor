@@ -22,9 +22,9 @@ def analyze_resume(text: str) -> str:
     
     {{
         "score": (0-100),
-        "strengths: [],
-        "weakness": [],
-        "missing_skills: [],
+        "strengths": [],
+        "weaknesses": [],
+        "missing_skills": [],
         "suggestions": []
     }}
     
